@@ -23,3 +23,16 @@ The name of our group is the Internet Explorers.
 8. Must be interactive (accept and respond to user input)
 
 
+### Skills
+
+* HTML
+* CSS
+* JavaScript
+* Server Side API
+* CSS Framework - Bulma
+
+### Mockup
+
+
+### Deployment URL
+
