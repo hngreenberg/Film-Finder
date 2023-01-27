@@ -4,33 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
-    <title>Film Finder</title>
-    
+    <title>Movie Search Website</title>
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- custom css -->
+    <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
-
-    <div class = "wrapper">
-      <div class = "logo">
-      <div class = "container">
-        <p>Film<span>Finder</span></p>
+    
+    <section class="hero is-small is-red">
+        <div class="hero-body">
+            <p class="title has-text-centered">
+            <img src="images/logo.png" 
+            alt="site logo"  
+            style="max-height: 70px">
+           FilmFinder
+          </p>
         </div>
-     </div>
+      </section>
+    
     </div>
+    <div class="search-container">
+        <div class="search-element">
+        <div class="level-left">
+                <div class="level-item">
+                  <p class="heading"><h3> Search Movie:</h3></p>
+                  <p class="title"><input type = "text" class = "form-control" placeholder = "Search a movie title" id = "movie-search-box"onkeyup="findMovies()" onclick = "findMovies()"></p>
+                  <div class = "search-list" id = "search-list"></div>
+                </div>
+                </div>
 
-     <div class = "searchtitle-container">
-      <div class = "searchtitle-element">
-        <h3>Search Movie by Title:</h3>
-        <input type = "text" class = "form-control" placeholder= "Search Movie Title..." id = "movie-search-box" onkey="findMovies()" onclick = "findMovies()">
+        <!-- end of logo -->
+        <!-- search container -->
+        <!-- <div class = "search-container">
+            <div class = "search-element">
+                <h3>Search Movie:</h3>
+                <input type = "text" class = "form-control" placeholder="Search Movie Title ..." id = "movie-search-box" onkeyup="findMovies()" onclick = "findMovies()">
 
-     <div class = "searchactor-container">
-      <div class = "searchactor-element">
-         <h3>Search Movie by Actor:</h3>
-         <input type = "text" class = "form-control" placeholder= "Search Movie Actor..." id = "movie-search-box" onkey="findMovies()" onclick = "findMovies()">
-        
-     <div class = "search-list" id = "search-list"></div>
-     <!-- list here -->
-                    <div class = "search-list-item">
+                <div class = "search-list" id = "search-list"> -->
+                    <!-- list here -->
+                    <!-- <div class = "search-list-item">
                         <div class = "search-item-thumbnail">
                             <img src = "medium-cover.jpg">
                         </div>
@@ -38,15 +51,18 @@
                             <h3>Guardians of the Galaxy Vol. 2</h3>
                             <p>2017</p>
                         </div>
-                    </div>
-     
-     <!-- result container -->
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- end of search container -->
 
-     <div class ="container"></div>
-        <div  class = "result-container"></div>
-            <div class = "result-grid" id = "result-grid">
-               <!-- movie information here -->
-                    <div class = "movie-poster">
+        <!-- result container -->
+        <div class = "container">
+            <div class = "result-container">
+                <div class = "result-grid" id = "result-grid">
+                    <!-- movie information here -->
+                    <!-- <div class = "movie-poster">
                         <img src = "medium-cover.jpg" alt = "movie poster">
                     </div>
                     <div class = "movie-info">
@@ -62,14 +78,14 @@
                         <p class = "plot"><b>Plot:</b> The Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord's ecounter with his father the ambitious celestial being Ego.</p>
                         <p class = "language"><b>Language:</b> English</p>
                         <p class = "awards"><b><i class = "fas fa-award"></i></b> Nominated for 1 Oscar</p>
-                    </div>
+                    </div> -->
+                </div>
             </div>
+        </div>
+        <!-- end of result container -->
+    </div>
 
-
-          
-     <script src = "script.js"></script>
-
-            
-    
+    <!-- movie app js -->
+    <script src = "script.js"></script>
 </body>
 </html>
