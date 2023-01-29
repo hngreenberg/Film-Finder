@@ -2,6 +2,13 @@ const movieSearchBox = document.getElementById('movie-search-box');
 const searchList = document.getElementById('search-list');
 const resultGrid = document.getElementById('result-grid');
 
+async function loadWatchProviders(searchTerm){
+    const URL = `https://api.themoviedb.org/3/movie/${searchTerm}/watch/providers?api_key=bc52def94157fd0cb506bbfde0b27c79`;
+    const res = await fetch(`${URL}`);
+    const data = await res.json();
+   
+    if(data.Response == "True") displayWatchProviders(data.Search);
+}
 
 async function loadMovies(searchTerm){
     const URL = `https://omdbapi.com/?s=${searchTerm}&page=1&apikey=da096189`;
@@ -9,6 +16,16 @@ async function loadMovies(searchTerm){
     const data = await res.json();
    
     if(data.Response == "True") displayMovieList(data.Search);
+}
+
+function findWatchProviders(){
+    let searchTerm = (movieSearchBox.value).trim();
+    if(searchTerm.length > 0){
+        searchList.classList.remove('hide-search-list');
+        loadWatchProviders(searchTerm);
+    } else {
+        searchList.classList.add('hide-search-list');
+    }
 }
 
 function findMovies(){
@@ -21,11 +38,36 @@ function findMovies(){
     }
 }
 
+function displayWatchList(movies){
+    searchList.innerHTML = "";
+    for(let idx = 0; idx < movies.length; idx++){
+        let movieWatchItem = document.createElement('div');
+        movieWatchItem.dataset.id = movies[idx].imdbID; 
+        movieWatchItem.classList.add('search-list-item');
+        if(movies[idx].Poster != "N/A")
+            moviePoster = movies[idx].Poster;
+        else 
+            moviePoster = "image_not_found.png";
+
+        movieWatchItem.innerHTML = `
+        <div class = "search-item-thumbnail">
+            <img src = "${moviePoster}">
+        </div>
+        <div class = "search-item-info">
+            <h3>${movies[idx].Title}</h3>
+            <p>${movies[idx].Year}</p>
+        </div>
+        `;
+        searchList.appendChild(movieWatchItem);
+    }
+    loadWatchDetails();
+}
+
 function displayMovieList(movies){
     searchList.innerHTML = "";
     for(let idx = 0; idx < movies.length; idx++){
         let movieListItem = document.createElement('div');
-        movieListItem.dataset.id = movies[idx].imdbID; // setting movie id in  data-id
+        movieListItem.dataset.id = movies[idx].imdbID; 
         movieListItem.classList.add('search-list-item');
         if(movies[idx].Poster != "N/A")
             moviePoster = movies[idx].Poster;
@@ -44,6 +86,21 @@ function displayMovieList(movies){
         searchList.appendChild(movieListItem);
     }
     loadMovieDetails();
+}
+
+function loadWatchDetails(){
+    const searchWatchMovies = searchList.querySelectorAll('.search-list-item');
+    searchWatchMovies.forEach(movie => {
+        movie.addEventListener('click', async () => {
+          
+            searchList.classList.add('hide-search-list');
+            movieSearchBox.value = "";
+            const result = await fetch(`https://api.themoviedb.org/3/movie/${searchTerm}/watch/providers?api_key=bc52def94157fd0cb506bbfde0b27c79`);
+            const watchDetails = await result.json();
+         
+            displayWatchDetails(watchDetails);
+        });
+    });
 }
 
 function loadMovieDetails(){
