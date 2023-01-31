@@ -33,6 +33,11 @@ The name of our group is the Internet Explorers.
 
 ### Mockup
 
+<img width="1430" alt="Screen Shot 2023-01-30 at 7 04 30 PM" src="https://user-images.githubusercontent.com/119267074/215652623-424131a9-fdca-4bb9-b125-ed2f9f44233b.png">
+
+
 
 ### Deployment URL
+
+
 
