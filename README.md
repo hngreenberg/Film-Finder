@@ -1,6 +1,6 @@
 # Interactive Front End Project 
 
-This project is a group based project that consists of everything we have learned in our coding bootcamp.
+This project is a group based project that consists of everything we have learned in our coding bootcamp thus far. 
 
 This project will provide an opportunity to showcase our journey to a full-stack web developer. 
 
@@ -38,6 +38,8 @@ The name of our group is the Internet Explorers.
 
 
 ### Deployment URL
+
+https://hngreenberg.github.io/Film-Finder---Project-1/
 
 
 
