@@ -3,10 +3,10 @@ const searchList = document.getElementById('search-list');
 const resultGrid = document.getElementById('result-grid');
 
 async function loadWatchProviders(searchTerm){
-    const URL = `https://api.themoviedb.org/3/movie/${searchTerm}/watch/providers?api_key=bc52def94157fd0cb506bbfde0b27c79`;
+    const URL = `https://api.themoviedb.org/3/movie/500/watch/providers?api_key=bc52def94157fd0cb506bbfde0b27c79`;
     const res = await fetch(`${URL}`);
     const data = await res.json();
-   
+   //console.log(data);
     if(data.Response == "True") displayWatchProviders(data.Search);
 }
 
@@ -14,8 +14,9 @@ async function loadMovies(searchTerm){
     const URL = `https://omdbapi.com/?s=${searchTerm}&page=1&apikey=da096189`;
     const res = await fetch(`${URL}`);
     const data = await res.json();
-   
+   //console.log(data);
     if(data.Response == "True") displayMovieList(data.Search);
+    
 }
 
 function findWatchProviders(){
@@ -88,6 +89,7 @@ function displayMovieList(movies){
     loadMovieDetails();
 }
 
+
 function loadWatchDetails(){
     const searchWatchMovies = searchList.querySelectorAll('.search-list-item');
     searchWatchMovies.forEach(movie => {
@@ -95,13 +97,15 @@ function loadWatchDetails(){
           
             searchList.classList.add('hide-search-list');
             movieSearchBox.value = "";
-            const result = await fetch(`https://api.themoviedb.org/3/movie/${searchTerm}/watch/providers?api_key=bc52def94157fd0cb506bbfde0b27c79`);
+            const result = await fetch(`https://api.themoviedb.org/3/movie/${movie.dataset.id}/watch/providers?api_key=bc52def94157fd0cb506bbfde0b27c79`);
             const watchDetails = await result.json();
          
             displayWatchDetails(watchDetails);
         });
     });
 }
+
+
 
 function loadMovieDetails(){
     const searchListMovies = searchList.querySelectorAll('.search-list-item');
@@ -141,7 +145,45 @@ function displayMovieDetails(details){
         <p class = "awards"><b><i class = "fas fa-award"></i></b> ${details.Awards}</p>
     </div>
     `;
+    console.log(details);
+    loadWatchProviders(details.imdbID);
 }
+
+function loadWatchProviders(imdbID){
+    const searchWatchProviders = resultGrid.querySelectorAll('.movie-info');
+    searchWatchProviders.forEach(movie => {
+        movie.addEventListener('click', async () => {
+          
+            searchList.classList.add('hide-search-list');
+            movieSearchBox.value = "";
+            const result = await fetch(`https://api.themoviedb.org/3/movie/${imdbID}/watch/providers?api_key=bc52def94157fd0cb506bbfde0b27c79`);
+            const watchProviders = await result.json();
+         
+            displayWatchProviders(watchProviders);
+        });
+    });
+}
+
+function displayWatchProviders(providers){
+    watchProvidersGrid.innerHTML = "";
+    for(let idx = 0; idx < providers.length; idx++){
+        let watchProviderItem = document.createElement('div');
+        watchProviderItem.classList.add('watch-provider-item');
+        watchProviderItem.innerHTML = `
+        <div class = "watch-provider-thumbnail">
+            <img src = "${providers[idx].Poster}">
+        </div>
+        <div class = "watch-provider-info">
+            <h3>${providers[idx].Title}</h3>
+            <p>${providers[idx].Year}</p>
+        </div>
+        `;
+        watchProvidersGrid.appendChild(watchProviderItem);
+    }
+}
+
+
+
 
 
 window.addEventListener('click', (event) => {
